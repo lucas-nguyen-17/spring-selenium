@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+ext {
+    junit5Version = '5.6.2'
+    assertJVersion = '3.8.0'
+    fakerVersion = '0.18'
+    seleniumVersion = '3.141.59'
+    allureVersion = '2.13.2'
+    webdriverManagerVersion = '4.0.0'
+}
+
+dependencies {
+    compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}",
+            "io.github.bonigarcia:webdrivermanager:${webdriverManagerVersion}"
+
+    implementation "com.github.javafaker:javafaker:${fakerVersion}"
+    testCompile "org.junit.jupiter:junit-jupiter:${junit5Version}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "io.qameta.allure:allure-junit5:${allureVersion}"
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
+
+test {
+    systemProperties project.properties.subMap(["env"])
+    useJUnitPlatform(
+    )
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+//task tagTest(type: Test) {
+//    useJUnitPlatform {
+//        includeTags 'smokeTest'
+//    }
+//    testLogging {
+//        events "passed", "skipped", "failed"
+//    }
+//}
+
+
+static def getDate() {
+    return new Date().format('dd-MM-yyyy_HH-mm')
+}
