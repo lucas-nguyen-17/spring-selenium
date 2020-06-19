@@ -1,21 +1,11 @@
 package com.giangtester.ecommerce;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import com.giangtester.base.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class BaseTest {
-
-    public WebDriver driver;
-
-    @BeforeAll
-    public static void setUp() {
-        WebDriverManager.chromedriver().setup();
-    }
+public class BaseEcommerceTest extends BaseTest {
 
     @BeforeEach
     public void prepare() {
@@ -23,10 +13,5 @@ public class BaseTest {
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
         driver.get("http://automationpractice.com/index.php");
-    }
-
-    @AfterEach
-    public void cleanUp() {
-        driver.quit();
     }
 }

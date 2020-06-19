@@ -1,6 +1,6 @@
 package com.giangtester.ecommerce.homepage;
 
-import com.giangtester.ecommerce.BaseTest;
+import com.giangtester.base.BaseTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
