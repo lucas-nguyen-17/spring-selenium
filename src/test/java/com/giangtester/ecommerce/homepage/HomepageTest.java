@@ -1,6 +1,6 @@
 package com.giangtester.ecommerce.homepage;
 
-import com.giangtester.base.BaseTest;
+import com.giangtester.ecommerce.BaseEcommerceTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HomepageTest extends BaseTest {
+public class HomepageTest extends BaseEcommerceTest {
 
     @Test
     void checkLogo() {

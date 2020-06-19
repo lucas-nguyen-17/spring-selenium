@@ -12,6 +12,5 @@ public class BaseLocalTest extends BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
-        driver.get("http://localhost:8080/");
     }
 }
