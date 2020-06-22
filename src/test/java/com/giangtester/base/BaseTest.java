@@ -1,7 +1,6 @@
 package com.giangtester.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 
@@ -14,8 +13,8 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @AfterEach
-    public void cleanUp() {
-        driver.quit();
-    }
+//    @AfterEach
+//    public void cleanUp() {
+//        driver.quit();
+//    }
 }
