@@ -3,6 +3,7 @@ package com.giangtester.localhost.chapter7;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -12,7 +13,11 @@ import java.net.URI;
 import java.net.URL;
 
 @Configuration
+@ComponentScan("com.giangtester")
 public class WebDriverConfig {
+
+    @Autowired
+    private WebDriverCleaner webDriverCleaner;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -49,14 +54,8 @@ public class WebDriverConfig {
     @Bean
     @Primary
     @Scope("prototype")
-    public WebDriver webDriver(WebDriverCleaner webDriverCleaner,
-                               @Qualifier("dirtyWebDriver") WebDriver driver) {
+    public WebDriver webDriver(@Qualifier("dirtyWebDriver") WebDriver driver) {
         return webDriverCleaner.cleanWebDriver(driver);
-    }
-
-    @Bean
-    public WebDriverCleaner webDriverCleaner() {
-        return new WebDriverCleaner();
     }
 
 }

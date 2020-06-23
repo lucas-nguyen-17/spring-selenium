@@ -15,7 +15,7 @@ import static org.springframework.test.context.TestExecutionListeners.MergeMode.
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = WebDriverConfig.class)
+@ContextConfiguration(classes = {WebDriverConfig.class})
 @TestExecutionListeners(listeners = ScreenshotTaker.class, mergeMode = MERGE_WITH_DEFAULTS)
 public @interface SeleniumRunner {
 }

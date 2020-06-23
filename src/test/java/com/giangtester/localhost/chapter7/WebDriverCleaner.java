@@ -1,10 +1,12 @@
 package com.giangtester.localhost.chapter7;
 
 import org.openqa.selenium.WebDriver;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class WebDriverCleaner {
 
     WebDriver cleanWebDriver(WebDriver driver) {
