@@ -30,20 +30,20 @@ public class WebDriverConfig {
         return new DesiredCapabilities(browserName, "", Platform.ANY);
     }
 
-    @Bean(destroyMethod = "quit")
-    @Lazy
-    public WebDriver dirtyWebDriver(WebDriverFactory webDriverFactory,
-                                    DesiredCapabilities desiredCapabilities,
-                                    URI baseUrl) {
-        return webDriverFactory.webDriver(desiredCapabilities, baseUrl);
-    }
-
     @Bean
     public WebDriverFactory webDriverFactory(
             @Value("${webdriver.remote:false}") boolean isRemoteDriver,
             @Value("${webdriver.remote.url:http://localhost:4444/wd/hub}") URL remoteUrl
     ) {
         return new WebDriverFactory(isRemoteDriver, remoteUrl);
+    }
+
+    @Bean(destroyMethod = "quit")
+    @Lazy
+    public WebDriver dirtyWebDriver(WebDriverFactory webDriverFactory,
+                                    DesiredCapabilities desiredCapabilities,
+                                    URI baseUrl) {
+        return webDriverFactory.webDriver(desiredCapabilities, baseUrl);
     }
 
     @Bean
