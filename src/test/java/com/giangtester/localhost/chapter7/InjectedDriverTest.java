@@ -1,21 +1,14 @@
 package com.giangtester.localhost.chapter7;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import java.net.URI;
 
-@ExtendWith(SpringExtension.class)
-@SpringJUnitConfig(WebDriverConfig.class)
-@TestExecutionListeners(listeners = {ScreenshotTaker.class, DependencyInjectionTestExecutionListener.class})
+@SeleniumRunner
 public class InjectedDriverTest {
 
     @Autowired
