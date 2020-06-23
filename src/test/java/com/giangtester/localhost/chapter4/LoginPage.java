@@ -33,6 +33,12 @@ public class LoginPage {
     public void loginAs(String email, String password) {
         txtEmail.sendKeys(email);
         txtPassword.sendKeys(password);
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         btnSubmit.click();
     }
 

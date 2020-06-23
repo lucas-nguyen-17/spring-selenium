@@ -44,7 +44,7 @@ public class WebDriverFactory {
                 options.addArguments("start-maximized");
                 return new ChromeDriver(options);
             default:
-                throw new IllegalStateException("unknown browser " + desiredCapabilities.getBrowserName());
+                throw new IllegalStateException("unknown browser");
         }
     }
 

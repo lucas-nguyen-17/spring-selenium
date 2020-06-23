@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.net.URI;
 import java.net.URL;
@@ -19,10 +18,8 @@ public class WebDriverConfig {
     @Autowired
     private WebDriverCleaner webDriverCleaner;
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
+    @Autowired
+    private EnvConfigFactory envConfigFactory;
 
     @Bean
     public URI baseUrl(@Value("${webdriver.baseUrl:http://localhost:8080}") URI value) {
@@ -33,6 +30,13 @@ public class WebDriverConfig {
     public DesiredCapabilities desiredCapabilities(
             @Value("${webdriver:chrome}") String browserName) {
         return new DesiredCapabilities(browserName, "", Platform.ANY);
+    }
+
+    @Bean
+    @Primary
+    public TestEnvironmentEnv getEnv(
+            @Value("${env:qa}") String environment) {
+        return envConfigFactory.get(environment);
     }
 
     @Bean
