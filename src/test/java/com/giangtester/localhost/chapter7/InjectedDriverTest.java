@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.net.URI;
-
 @SeleniumRunner
 public class InjectedDriverTest {
 
@@ -15,7 +13,7 @@ public class InjectedDriverTest {
     private WebDriver driver;
 
     @Autowired
-    private URI baseURL;
+    private LoadConfig config;
 
     @Test
     void openPage() {
@@ -25,13 +23,13 @@ public class InjectedDriverTest {
     @Test
     @DirtiesContext
     void openPage1() {
-        driver.get(baseURL + "/popups.html");
+        driver.get(config.getBaseUrl() + "/popups.html");
         driver.findElement(By.id("alert")).click();
         driver.switchTo().alert().accept();
     }
 
     @Test
     void openPage2() {
-        driver.get(baseURL + "/");
+        driver.get(config.getBaseUrl() + "/");
     }
 }

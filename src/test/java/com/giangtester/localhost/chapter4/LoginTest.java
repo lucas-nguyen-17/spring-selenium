@@ -1,7 +1,7 @@
 package com.giangtester.localhost.chapter4;
 
+import com.giangtester.localhost.chapter7.LoadConfig;
 import com.giangtester.localhost.chapter7.SeleniumRunner;
-import com.giangtester.localhost.chapter7.TestEnvironment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ public class LoginTest {
     private LoginForm loginForm;
 
     @Autowired
-    private TestEnvironment env;
+    private LoadConfig env;
 
     @Test
     void test1() {
