@@ -1,7 +1,7 @@
 package com.giangtester.localhost.chapter4;
 
 import com.giangtester.localhost.chapter7.SeleniumRunner;
-import com.giangtester.localhost.chapter7.TestEnvironmentEnv;
+import com.giangtester.localhost.chapter7.TestEnvironment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class LoginTest {
 
     @Autowired
-    private LoginPage loginPage;
+    private LoginForm loginForm;
 
     @Autowired
-    private TestEnvironmentEnv env;
+    private TestEnvironment env;
 
     @Test
     void test1() {
-        loginPage.gotoPage();
-        loginPage.loginAs(env.getName(), env.getPassword());
-        loginPage.loginSuccess();
+        loginForm.gotoPage();
+        loginForm.loginAs(env.getName(), env.getPassword());
+        loginForm.loginSuccess();
     }
 }
