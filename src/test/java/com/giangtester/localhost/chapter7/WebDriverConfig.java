@@ -18,9 +18,6 @@ public class WebDriverConfig {
     @Autowired
     private WebDriverCleaner webDriverCleaner;
 
-    @Autowired
-    private EnvConfigFactory envConfigFactory;
-
     @Bean
     public URI baseUrl(@Value("${webdriver.baseUrl:http://localhost:8080}") URI value) {
         return value;
@@ -30,13 +27,6 @@ public class WebDriverConfig {
     public DesiredCapabilities desiredCapabilities(
             @Value("${webdriver:chrome}") String browserName) {
         return new DesiredCapabilities(browserName, "", Platform.ANY);
-    }
-
-    @Bean
-    @Primary
-    public TestEnvironmentEnv getEnv(
-            @Value("${env:qa}") String environment) {
-        return envConfigFactory.get(environment);
     }
 
     @Bean
