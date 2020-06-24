@@ -13,7 +13,7 @@ import java.net.URL;
 
 @Configuration
 @ComponentScan("com.giangtester")
-@PropertySource("classpath:app.properties")
+@PropertySource("classpath:application.properties")
 public class WebDriverConfig {
 
     @Autowired
