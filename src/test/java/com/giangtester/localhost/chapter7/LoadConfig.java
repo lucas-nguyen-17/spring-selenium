@@ -12,10 +12,7 @@ public class LoadConfig {
 
     private LoadConfig() {
         conf = ConfigFactory.load("application.conf");
-        String chosenEnv = System.getProperty("env");
-        if (chosenEnv == null) {
-            chosenEnv = "qa";
-        }
+        String chosenEnv = System.getProperty("env", "qa");
         this.conf = conf.getConfig(chosenEnv);
     }
 
