@@ -6,6 +6,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
@@ -13,12 +18,20 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 
+@Configuration
+@PropertySource("classpath:app.properties")
 public class ScreenshotTaker extends AbstractTestExecutionListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScreenshotTaker.class);
 
+    @Autowired
+    private Environment environment;
+
+    @Value("${webdriver.screenshots.enabled}")
+    private boolean isScreenshotEnabled;
+
     @Override
     public void afterTestMethod(TestContext testContext) throws Exception {
-        if (Boolean.parseBoolean(System.getProperty("webdriver.screenshots.enabled", "true"))) {
+        if (isScreenshotEnabled) {
             TakesScreenshot takesScreenshot = (TakesScreenshot) testContext.getApplicationContext()
                     .getBean(WebDriver.class);
             File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
@@ -33,4 +46,9 @@ public class ScreenshotTaker extends AbstractTestExecutionListener {
             LOGGER.info("saved screenshot as {}", file);
         }
     }
+
+    private boolean isScreenshotEnabled() {
+        return Boolean.parseBoolean(environment.getProperty("webdriver.screenshots.enabled"));
+    }
+
 }
