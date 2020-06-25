@@ -6,6 +6,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.AbstractTestExecutionListener;
 
@@ -13,6 +17,8 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 
+@Configuration
+@PropertySource("classpath:application.properties")
 public class ScreenshotTaker extends AbstractTestExecutionListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(ScreenshotTaker.class);
 
@@ -35,7 +41,9 @@ public class ScreenshotTaker extends AbstractTestExecutionListener {
     }
 
     private boolean isScreenshotEnabled() {
-        return Boolean.parseBoolean(System.getProperty("webdriver.screenshots.enabled", "true"));
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScreenshotTaker.class);
+        ConfigurableEnvironment environment = context.getEnvironment();
+        return Boolean.parseBoolean(environment.getProperty("webdriver.screenshots.enabled"));
     }
 
 }
