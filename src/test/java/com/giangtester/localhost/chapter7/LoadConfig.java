@@ -24,7 +24,7 @@ public class LoadConfig {
     private String testEnv() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LoadConfig.class);
         ConfigurableEnvironment environment = context.getEnvironment();
-        log.info(String.valueOf(environment.getPropertySources()));
+        log.info(String.format("test environment is %s", environment.getProperty("env")));
         return environment.getProperty("env", "qa");
     }
 
