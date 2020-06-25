@@ -2,29 +2,45 @@ package com.giangtester.localhost.chapter7;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.net.URI;
 
-@Component
+@Configuration
+@PropertySource("classpath:application.properties")
+@Slf4j
 public class LoadConfig {
-    private Config conf;
 
-    private LoadConfig() {
+    private final Config conf;
+
+    public LoadConfig() {
         conf = ConfigFactory.load("application.conf");
-        String chosenEnv = System.getProperty("env", "qa");
-        this.conf = conf.getConfig(chosenEnv);
     }
 
-    public URI getBaseUrl(){
-        return URI.create(conf.getString("baseURL"));
+    private String testEnv() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LoadConfig.class);
+        ConfigurableEnvironment environment = context.getEnvironment();
+        log.info(String.valueOf(environment.getPropertySources()));
+        return environment.getProperty("env", "qa");
+    }
+
+    private Config setEnv() {
+        return conf.getConfig(testEnv());
+    }
+
+    public URI getBaseUrl() {
+        return URI.create(setEnv().getString("baseURL"));
     }
 
     public String getName() {
-        return conf.getString("account.admin");
+        return setEnv().getString("account.admin");
     }
 
     public String getPassword() {
-        return conf.getString("account.password");
+        return setEnv().getString("account.password");
     }
 }

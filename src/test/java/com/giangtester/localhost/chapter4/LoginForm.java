@@ -1,6 +1,7 @@
 package com.giangtester.localhost.chapter4;
 
 import com.giangtester.localhost.chapter7.LoadConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
+@Slf4j
 public class LoginForm {
 
     private final WebDriver driver;
@@ -39,6 +41,7 @@ public class LoginForm {
         txtEmail.sendKeys(email);
         txtPassword.sendKeys(password);
         btnSubmit.click();
+        log.info(String.format("email=%s, pass=%s", email, password));
     }
 
     public void loginSuccess() {
