@@ -18,7 +18,7 @@ public class ScreenshotTaker extends AbstractTestExecutionListener {
 
     @Override
     public void afterTestMethod(TestContext testContext) throws Exception {
-        if (Boolean.parseBoolean(System.getProperty("webdriver.screenshots.enabled", "true"))) {
+        if (isScreenshotEnabled()) {
             TakesScreenshot takesScreenshot = (TakesScreenshot) testContext.getApplicationContext()
                     .getBean(WebDriver.class);
             File screenshot = takesScreenshot.getScreenshotAs(OutputType.FILE);
@@ -33,4 +33,9 @@ public class ScreenshotTaker extends AbstractTestExecutionListener {
             LOGGER.info("saved screenshot as {}", file);
         }
     }
+
+    private boolean isScreenshotEnabled() {
+        return Boolean.parseBoolean(System.getProperty("webdriver.screenshots.enabled", "true"));
+    }
+
 }

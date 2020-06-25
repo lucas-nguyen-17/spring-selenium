@@ -1,6 +1,6 @@
 package com.giangtester.localhost.chapter4;
 
-import com.giangtester.localhost.chapter7.TestEnvironment;
+import com.giangtester.localhost.chapter7.LoadConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +16,7 @@ public class LoginForm {
     private final WebDriver driver;
 
     @Autowired
-    private TestEnvironment env;
+    private LoadConfig config;
 
     @FindBy(name = "email")
     private WebElement txtEmail;
@@ -46,6 +46,6 @@ public class LoginForm {
     }
 
     public void gotoPage() {
-        driver.get(env.getBaseUrl() + "/login.html");
+        driver.get(config.getBaseUrl() + "/login.html");
     }
 }

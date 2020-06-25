@@ -1,10 +1,6 @@
 package com.giangtester.localhost.chapter7;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -36,13 +32,9 @@ public class WebDriverFactory {
     private WebDriver localDriver(DesiredCapabilities desiredCapabilities) {
         switch (desiredCapabilities.getBrowserName()) {
             case BrowserType.FIREFOX:
-                WebDriverManager.firefoxdriver().setup();
-                return new FirefoxDriver();
+                return CustomFirefox.create();
             case BrowserType.CHROME:
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("start-maximized");
-                return new ChromeDriver(options);
+                return CustomChrome.create();
             default:
                 throw new IllegalStateException("unknown browser");
         }

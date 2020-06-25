@@ -13,19 +13,23 @@ import java.net.URL;
 
 @Configuration
 @ComponentScan("com.giangtester")
+@PropertySource("classpath:application.properties")
 public class WebDriverConfig {
 
     @Autowired
     private WebDriverCleaner webDriverCleaner;
 
+    @Autowired
+    private LoadConfig config;
+
     @Bean
-    public URI baseUrl(@Value("${webdriver.baseUrl:http://localhost:8080}") URI value) {
-        return value;
+    public URI getBaseUrl() {
+        return config.getBaseUrl();
     }
 
     @Bean
     public DesiredCapabilities desiredCapabilities(
-            @Value("${webdriver:chrome}") String browserName) {
+            @Value("${browser}") String browserName) {
         return new DesiredCapabilities(browserName, "", Platform.ANY);
     }
 
