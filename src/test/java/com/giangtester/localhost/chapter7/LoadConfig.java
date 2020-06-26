@@ -3,7 +3,7 @@ package com.giangtester.localhost.chapter7;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -17,13 +17,14 @@ public class LoadConfig {
 
     private final Config conf;
 
+    @Autowired
+    private ConfigurableEnvironment environment;
+
     public LoadConfig() {
         conf = ConfigFactory.load("application.conf");
     }
 
     private String testEnv() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LoadConfig.class);
-        ConfigurableEnvironment environment = context.getEnvironment();
         log.info(String.format("test environment is %s", environment.getProperty("env")));
         return environment.getProperty("env", "qa");
     }

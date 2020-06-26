@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.net.URI;
 import java.net.URL;
@@ -54,6 +55,19 @@ public class WebDriverConfig {
     @Scope("prototype")
     public WebDriver webDriver(@Qualifier("dirtyWebDriver") WebDriver driver) {
         return webDriverCleaner.cleanWebDriver(driver);
+    }
+
+    @Bean
+    @Primary
+    public ConfigurableEnvironment environment() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LoadConfig.class);
+        return context.getEnvironment();
+    }
+
+    @Bean
+    @Scope("singleton")
+    public LoadConfig loadConfig() {
+        return new LoadConfig();
     }
 
 }
