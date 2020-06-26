@@ -24,7 +24,7 @@ public class WebDriverConfig {
     private LoadConfig config;
 
     @Bean
-    public URI getBaseUrl() {
+    public URI baseUrl() {
         return config.getBaseUrl();
     }
 
