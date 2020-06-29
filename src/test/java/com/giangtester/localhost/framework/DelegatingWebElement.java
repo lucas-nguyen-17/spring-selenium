@@ -5,7 +5,7 @@ import org.openqa.selenium.*;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class DelegatingWebElement implements WebElement {
+public class DelegatingWebElement implements WebElement, WrapsElement, ExplicitWait {
 
     protected final WebElement delegateElement;
 
@@ -100,5 +100,10 @@ public class DelegatingWebElement implements WebElement {
     @Override
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return delegateElement.getScreenshotAs(outputType);
+    }
+
+    @Override
+    public WebElement getWrappedElement() {
+        return ((WrapsElement) delegateElement).getWrappedElement();
     }
 }
