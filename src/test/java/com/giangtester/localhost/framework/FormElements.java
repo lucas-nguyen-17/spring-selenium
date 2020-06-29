@@ -76,16 +76,16 @@ public interface FormElements extends ExplicitWait {
     default void selectByVisibleText(Supplier<By> by, Object... values) {
         for (Object v : values) {
             getSelect(by).selectByVisibleText(v.toString());
+            boolean isFirstOption = getSelect(by)
+                    .getFirstSelectedOption()
+                    .getText()
+                    .equals(v.toString());
             try {
-                if (!getSelect(by)
-                        .getFirstSelectedOption()
-                        .getText()
-                        .equals(v.toString())) {
+                if (!isFirstOption) {
                     getSelect(by)
                             .getOptions()
                             .stream()
-                            .filter(
-                                    e -> e.getText().equals(v.toString()))
+                            .filter(e -> e.getText().equals(v.toString()))
                             .findFirst()
                             .get()
                             .click();
