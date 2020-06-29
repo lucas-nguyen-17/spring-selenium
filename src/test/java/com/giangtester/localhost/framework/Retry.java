@@ -20,7 +20,8 @@ public class Retry {
                 return;
             } catch (Exception e) {
                 if (i == count - 1) {
-                    throw new IllegalStateException(e);
+                    throw new IllegalStateException(
+                            String.format("try %d times but cannot do it, because of %s", count, e));
                 }
             }
             try {

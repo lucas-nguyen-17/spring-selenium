@@ -19,6 +19,7 @@ public interface FormElements extends ExplicitWait {
                     Element element = await(by);
                     element.clear();
                     element.sendKeys(value.toString());
+                    // TODO: 6/29/2020  getAttribute may not work on chrome
                     assert value.toString().equals(element.getValue());
                 }
         );
