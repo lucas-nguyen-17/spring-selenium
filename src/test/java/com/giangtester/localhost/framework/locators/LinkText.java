@@ -13,8 +13,8 @@ public enum LinkText implements Supplier<By> {
 
     private final By by;
 
-    LinkText(String id) {
-        this.by = linkText(id);
+    LinkText(String linkText) {
+        this.by = linkText(linkText);
     }
 
     @Override
