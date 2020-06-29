@@ -95,4 +95,9 @@ public class DelegatingWebElement extends DelegatingSearchContext<WebElement>
     public Coordinates getCoordinates() {
         return ((Locatable) delegate).getCoordinates();
     }
+
+    public String getValue() {
+        return delegate.getAttribute("value");
+    }
+
 }
