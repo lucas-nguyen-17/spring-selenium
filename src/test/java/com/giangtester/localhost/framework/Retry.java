@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class Retry {
     private final long interval;
     private final TimeUnit unit;
-    private long count;
+    private final long count;
 
     public Retry(int count, int interval, TimeUnit unit) {
         this.count = count;

@@ -9,7 +9,13 @@ public class CustomChrome {
     public static WebDriver create() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
+        options.addArguments("start-maximized",
+                "--disable-web-security",
+                "--ignore-certificate-errors",
+                "--allow-running-insecure-content",
+                "--allow-insecure-localhost",
+                "--no-sandbox",
+                "--disable-gpu");
         return new ChromeDriver(options);
     }
 }
