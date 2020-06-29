@@ -1,15 +1,15 @@
 package com.giangtester.localhost.framework.pages;
 
-import swb.ch15pageflow.domain.Address;
-import swb.ch15pageflow.domain.CreditCard;
-import swb.ch15pageflow.domain.OtherInformation;
-import swb.framework.Browser;
+import com.giangtester.localhost.framework.Browser;
+import com.giangtester.localhost.framework.domain.Address;
+import com.giangtester.localhost.framework.domain.CreditCard;
+import com.giangtester.localhost.framework.domain.OtherInformation;
 
-import static swb.locators.CssSelector.CONFIRM;
+import static com.giangtester.localhost.framework.locators.CssSelector.CONFIRM;
 
 public class ShoppingCartPage {
 
-    private final swb.ch15pageflow.pages.BillingAddressForm billingAddressForm;
+    private final BillingAddressForm billingAddressForm;
     private final CreditCardForm creditCardForm;
     private final OtherInformationForm otherInformationForm;
     private final Browser browser;
@@ -17,7 +17,7 @@ public class ShoppingCartPage {
     public ShoppingCartPage(Browser browser) {
         this.browser = browser;
         this.otherInformationForm = new OtherInformationForm(browser);
-        this.billingAddressForm = new swb.ch15pageflow.pages.BillingAddressForm(browser);
+        this.billingAddressForm = new BillingAddressForm(browser);
         this.creditCardForm = new CreditCardForm(browser);
     }
 

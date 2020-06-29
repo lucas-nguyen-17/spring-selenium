@@ -63,7 +63,7 @@ public enum UnitedStates {
         return this.name().replace(' ', ' ');
     }
 
-    public static swb.ch15pageflow.domain.UnitedStates fromString(String string) {
+    public static UnitedStates fromString(String string) {
         return valueOf(string.replace(' ', '_'));
     }
 

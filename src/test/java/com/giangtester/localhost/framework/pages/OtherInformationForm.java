@@ -1,10 +1,10 @@
 package com.giangtester.localhost.framework.pages;
 
-import swb.ch15pageflow.domain.OtherInformation;
-import swb.framework.Browser;
+import com.giangtester.localhost.framework.Browser;
+import com.giangtester.localhost.framework.domain.OtherInformation;
 
-import static swb.locators.Id.*;
-import static swb.locators.Name.MAILING_OPTION;
+import static com.giangtester.localhost.framework.locators.Id.*;
+import static com.giangtester.localhost.framework.locators.Name.MAILING_OPTION;
 
 public class OtherInformationForm {
 
