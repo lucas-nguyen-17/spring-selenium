@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class DelegatingWebDriver implements WebDriver, JavascriptExecutor, TakesScreenshot,
         HasCapabilities, WrapsDriver {
@@ -102,5 +103,9 @@ public class DelegatingWebDriver implements WebDriver, JavascriptExecutor, Takes
     @Override
     public WebDriver getWrappedDriver() {
         return ((WrapsDriver) delegate).getWrappedDriver();
+    }
+
+    public WebElement findElement(Supplier<By> by) {
+        return findElement(by.get());
     }
 }
