@@ -2,112 +2,93 @@ package com.giangtester.localhost.framework;
 
 import org.openqa.selenium.*;
 
-import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 
-public class DelegatingWebDriver implements WebDriver, JavascriptExecutor, TakesScreenshot,
-        HasCapabilities, WrapsDriver, ExplicitWait {
+public class DelegatingWebDriver extends DelegatingSearchContext<WebDriver>
+        implements WebDriver, JavascriptExecutor, TakesScreenshot, HasCapabilities, WrapsDriver {
 
-    private final WebDriver delegateDriver;
-
-    public DelegatingWebDriver(WebDriver driver) {
-        this.delegateDriver = driver;
+    public DelegatingWebDriver(WebDriver delegate) {
+        super(delegate);
     }
 
     @Override
     public void get(String url) {
-        delegateDriver.get(url);
+        delegate.get(url);
     }
 
     @Override
     public String getCurrentUrl() {
-        return delegateDriver.getCurrentUrl();
+        return delegate.getCurrentUrl();
     }
 
     @Override
     public String getTitle() {
-        return delegateDriver.getTitle();
-    }
-
-    @Override
-    public List<WebElement> findElements(By by) {
-        return delegateDriver.findElements(by);
-    }
-
-    @Override
-    public Element findElement(By by) {
-        return new Element(delegateDriver.findElement(by));
-    }
-
-    @Override
-    public Element findElement(Supplier<By> by) {
-        return new Element(delegateDriver.findElement(by.get()));
+        return delegate.getTitle();
     }
 
     @Override
     public String getPageSource() {
-        return delegateDriver.getPageSource();
+        return delegate.getPageSource();
     }
 
     @Override
     public void close() {
-        delegateDriver.close();
+        delegate.close();
     }
 
     @Override
     public void quit() {
-        delegateDriver.quit();
+        delegate.quit();
     }
 
     @Override
     public Set<String> getWindowHandles() {
-        return delegateDriver.getWindowHandles();
+        return delegate.getWindowHandles();
     }
 
     @Override
     public String getWindowHandle() {
-        return delegateDriver.getWindowHandle();
+        return delegate.getWindowHandle();
     }
 
     @Override
     public TargetLocator switchTo() {
-        return delegateDriver.switchTo();
+        return delegate.switchTo();
     }
 
     @Override
     public Navigation navigate() {
-        return delegateDriver.navigate();
+        return delegate.navigate();
     }
 
     @Override
     public Options manage() {
-        return delegateDriver.manage();
+        return delegate.manage();
     }
 
     @Override
     public Object executeScript(String script, Object... args) {
-        return ((JavascriptExecutor) delegateDriver).executeScript(script, args);
+        return ((JavascriptExecutor) delegate).executeScript(script, args);
     }
 
     @Override
     public Object executeAsyncScript(String script, Object... args) {
-        return ((JavascriptExecutor) delegateDriver).executeAsyncScript(script, args);
+        return ((JavascriptExecutor) delegate).executeAsyncScript(script, args);
     }
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
-        return ((TakesScreenshot) delegateDriver).getScreenshotAs(target);
+        return ((TakesScreenshot) delegate).getScreenshotAs(target);
     }
 
     @Override
     public Capabilities getCapabilities() {
-        return ((HasCapabilities) delegateDriver).getCapabilities();
+        return ((HasCapabilities) delegate).getCapabilities();
     }
 
     @Override
     public WebDriver getWrappedDriver() {
-        return ((WrapsDriver) delegateDriver).getWrappedDriver();
+        return ((WrapsDriver) delegate).getWrappedDriver();
     }
 
 }

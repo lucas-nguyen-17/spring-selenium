@@ -1,109 +1,98 @@
 package com.giangtester.localhost.framework;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
 
-import java.util.List;
-import java.util.function.Supplier;
+public class DelegatingWebElement extends DelegatingSearchContext<WebElement>
+        implements WebElement, WrapsElement, Locatable {
 
-public class DelegatingWebElement implements WebElement, WrapsElement, ExplicitWait {
-
-    protected final WebElement delegateElement;
-
-    public DelegatingWebElement(WebElement delegateElement) {
-        this.delegateElement = delegateElement;
-    }
-
-    @Override
-    public List<WebElement> findElements(By by) {
-        return delegateElement.findElements(by);
-    }
-
-    @Override
-    public Element findElement(By by) {
-        return new Element(delegateElement.findElement(by));
-    }
-
-    public Element findElement(Supplier<By> by) {
-        return new Element(delegateElement.findElement(by.get()));
+    public DelegatingWebElement(WebElement delegate) {
+        super(delegate);
     }
 
     @Override
     public void click() {
-        delegateElement.click();
+        delegate.click();
     }
 
     @Override
     public void submit() {
-        delegateElement.submit();
+        delegate.submit();
     }
 
     @Override
     public void sendKeys(CharSequence... keysToSend) {
-        delegateElement.sendKeys(keysToSend);
+        delegate.sendKeys(keysToSend);
     }
 
     @Override
     public void clear() {
-        delegateElement.clear();
+        delegate.clear();
     }
 
     @Override
     public String getTagName() {
-        return delegateElement.getTagName();
+        return delegate.getTagName();
     }
 
     @Override
     public String getAttribute(String name) {
-        return delegateElement.getAttribute(name);
+        return delegate.getAttribute(name);
     }
 
     @Override
     public boolean isSelected() {
-        return delegateElement.isSelected();
+        return delegate.isSelected();
     }
 
     @Override
     public boolean isEnabled() {
-        return delegateElement.isEnabled();
+        return delegate.isEnabled();
     }
 
     @Override
     public String getText() {
-        return delegateElement.getText();
+        return delegate.getText();
     }
 
     @Override
     public boolean isDisplayed() {
-        return delegateElement.isDisplayed();
+        return delegate.isDisplayed();
     }
 
     @Override
     public Point getLocation() {
-        return delegateElement.getLocation();
+        return delegate.getLocation();
     }
 
     @Override
     public Dimension getSize() {
-        return delegateElement.getSize();
+        return delegate.getSize();
     }
 
     @Override
     public Rectangle getRect() {
-        return delegateElement.getRect();
+        return delegate.getRect();
     }
 
     @Override
     public String getCssValue(String propertyName) {
-        return delegateElement.getCssValue(propertyName);
+        return delegate.getCssValue(propertyName);
     }
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return delegateElement.getScreenshotAs(outputType);
+        return delegate.getScreenshotAs(outputType);
     }
 
     @Override
     public WebElement getWrappedElement() {
-        return ((WrapsElement) delegateElement).getWrappedElement();
+        return ((WrapsElement) delegate).getWrappedElement();
+    }
+
+    @Override
+    public Coordinates getCoordinates() {
+        return ((Locatable) delegate).getCoordinates();
     }
 }
