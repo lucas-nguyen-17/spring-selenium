@@ -1,5 +1,6 @@
 package com.giangtester.localhost.chapter7;
 
+import com.giangtester.localhost.framework.BaseUrlDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
@@ -20,9 +21,10 @@ public class WebDriverFactory {
     }
 
     WebDriver webDriver(DesiredCapabilities desiredCapabilities, URI baseUrl) {
-        return isRemoteDriver ?
+        WebDriver baseDriver = isRemoteDriver ?
                 remoteDriver(remoteUrl, desiredCapabilities) :
                 localDriver(desiredCapabilities);
+        return new BaseUrlDriver(baseDriver, baseUrl);
     }
 
     private WebDriver remoteDriver(URL remoteUrl, DesiredCapabilities desiredCapabilities) {
