@@ -1,5 +1,6 @@
 package com.giangtester.localhost.chapter7;
 
+import com.giangtester.localhost.framework.BrowserConfig;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,6 +15,7 @@ import java.net.URL;
 
 @Configuration
 @ComponentScan("com.giangtester")
+@Import(BrowserConfig.class)
 @PropertySource("classpath:application.properties")
 public class WebDriverConfig {
 
