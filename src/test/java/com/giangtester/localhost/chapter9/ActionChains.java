@@ -1,6 +1,7 @@
 package com.giangtester.localhost.chapter9;
 
 import com.giangtester.localhost.chapter7.SeleniumRunner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +26,7 @@ public class ActionChains {
     private URI baseUrl;
 
     @Test
-    public void staleElementProblem() throws Exception {
+    public void staleElementProblem() {
         driver.get(baseUrl + "/stale-elements.html");
         WebElement button = driver.findElement(By.id("button"));
         new Actions(driver)
@@ -35,7 +36,7 @@ public class ActionChains {
     }
 
     @Test
-//    @Disabled
+    @Disabled
     public void lazyActionChain(){
 
         driver.get(baseUrl + "/stale-elements.html");
